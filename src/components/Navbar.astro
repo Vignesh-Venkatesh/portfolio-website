@@ -1,0 +1,25 @@
+---
+const links = [
+    { label: "experience", href: "#experience" },
+    { label: "projects", href: "#projects" },
+    { label: "skills", href: "#skills" },
+    { label: "blog", href: "https://blog.vigneshvenkatesh.com" },
+];
+---
+
+<nav class="flex justify-between items-end">
+    <a href="/" class="text-[#01df72] font-bold text-2xl"> vigiii.</a>
+
+    <div class="hidden sm:flex gap-5 tracking-wide">
+        {
+            links.map(({ label, href }) => (
+                <a
+                    href={href}
+                    class="text font-semibold hover:text-[#01df72] duration-200"
+                >
+                    {label}
+                </a>
+            ))
+        }
+    </div>
+</nav>

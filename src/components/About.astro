@@ -1,0 +1,72 @@
+---
+import { FaGithub, FaLinkedin, FaLinkedinIn } from "react-icons/fa";
+import { FiLinkedin } from "react-icons/fi";
+
+const links = [
+    { label: "Resume", href: "/resume.pdf", icon: false },
+    {
+        label: "GitHub",
+        href: "https://github.com/Vignesh-Venkatesh",
+        icon: true,
+    },
+    {
+        label: "LinkedIn",
+        href: "https://linkedin.com/in/vignesh-2k3",
+        icon: true,
+    },
+];
+
+const birthdate = new Date("2003");
+const age = Math.floor(
+    (Date.now() - birthdate.getTime()) / (1000 * 60 * 60 * 24 * 365.25),
+);
+---
+
+<section class="py-14">
+    <p class="text-sm mb-2">hey 👋, I'm</p>
+
+    <!-- name -->
+    <h1 class="text-4xl font-bold opacity-95 mb-1">
+        Vignesh Venkatesh
+        <span class="text-sm italic font-normal text-[#4a6a62]"
+            >{age} he/him</span
+        >
+    </h1>
+
+    <!-- tagline -->
+    <p class="opacity-90 text-sm my-4">
+        gruvbox is <span class="animate-pulse">💚</span>
+    </p>
+
+    <!-- buttons -->
+    <div class="flex gap-3 mb-12">
+        {
+            links.map(({ label, href, icon }) => (
+                <a href={href} target="_blank" rel="noopener noreferrer">
+                    <button class="bg-green-400 px-3 py-2 rounded text-sm text-gray-950/85 font-semibold border-b-2 border-[#00513b] cursor-pointer hover:bg-green-400/90 duration-200">
+                        {icon && label == "GitHub" && (
+                            <FaGithub className="w-5 h-5" />
+                        )}
+                        {icon && label == "LinkedIn" && (
+                            <FaLinkedinIn className="w-5 h-5" />
+                        )}
+                        {!icon && <p>{label}</p>}
+                    </button>
+                </a>
+            ))
+        }
+    </div>
+
+    <p class="opacity-40 tracking-wider font-semibold text-xl mb-2">/me</p>
+    <p class="">
+        I'm a Masters student at
+        <a
+            class="hover:text-violet-400 duration-300 cursor-pointer"
+            href="https://nyu.edu"
+            target="_blank"
+        >
+            New York University (NYU)
+        </a>, pursuing an M.S. in Computer Science with a potential
+        specialization in Systems.
+    </p>
+</section>

@@ -1,0 +1,70 @@
+---
+const experiences = [
+    {
+        title: "Distributed Control Systems — Intern",
+        company: "Yokogawa Electric",
+        date: "May 2024 – June 2024",
+        location: "Abu Dhabi, U.A.E",
+        bullets: [
+            "Executed inspections of DCS cabinets, ensuring adherence to functional design specifications.",
+            "Developed alarm suppression systems, step function, and moving average block for industrial plant monitoring systems.",
+            "Assisted in managing project engineering life cycles, contributing to the inception stage.",
+        ],
+    },
+    {
+        title: "Digital Design Course — Learning Assistant",
+        company: "The Pennsylvania State University",
+        date: "Aug 2023 – May 2025",
+        location: "State College, PA",
+        bullets: [
+            "Managed and moderated an online class forum, providing feedback on student posts and facilitating discussions.",
+            "Assisted the professor in grading assignments, ensuring timely and accurate evaluation of 200+ submissions per week.",
+            "Collaborated with the professor and other teaching assistants to develop course materials and content.",
+        ],
+    },
+];
+---
+
+<section id="experience" class="py-10">
+    <p class="opacity-40 tracking-wider font-semibold text-xl mb-2">
+        /experience
+    </p>
+
+    <div class="flex flex-col">
+        {
+            experiences.map((exp) => (
+                <div class="border-l-2 border-[#4a6a62] hover:border-[#01df72] p-4 group transition duration-300 my-6">
+                    <div class="flex justify-between items-center gap-2">
+                        <div>
+                            <h1 class="text-lg font-bold text-[#01df72]/80 transition duration-300">
+                                {exp.title}
+                            </h1>
+
+                            <h1 class="text-[#4a6a62] text-sm font-semibold">
+                                <span class="italic font-medium">at</span>,{" "}
+                                {exp.company}
+                            </h1>
+
+                            <div class="block sm:hidden text-sm text-[#4a6a62]">
+                                <h1>{exp.location}</h1>
+                                <h1>{exp.date}</h1>
+                            </div>
+                        </div>
+
+                        <div class="hidden sm:block text-sm  text-[#4a6a62]">
+                            <h1>{exp.date}</h1>
+                            <h1>{exp.location}</h1>
+                        </div>
+                    </div>
+                    <ul class="flex flex-col gap-1 mt-2">
+                        {exp.bullets.map((bullet) => (
+                            <li class="leading-relaxed opacity-85">
+                                <span class="text-[#4a6a62]">•</span> {bullet}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))
+        }
+    </div>
+</section>

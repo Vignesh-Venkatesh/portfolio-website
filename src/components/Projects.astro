@@ -1,0 +1,106 @@
+---
+import { FaGithub } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
+
+const projects = [
+    {
+        title: "Dynamic Memory Allocator",
+        bullets: [
+            "Designed and implemented a dynamic memory allocator, optimizing memory management through efficient allocation and deallocation of blocks in a custom heap system.",
+            "Developed a segregated free list to organize memory into bins based on block sizes, improving allocation speed and reducing fragmentation.",
+            "Utilized 16-byte alignment for both allocated and free blocks, ensuring performance optimization and adhering to memory structure constraints.",
+        ],
+        tags: ["C", "C++"],
+        repo: "https://github.com/Vignesh-Venkatesh/DynamicMemoryAllocator",
+        live: null,
+    },
+    {
+        title: "Movieboxd",
+        bullets: [
+            "Built a full-stack web application for discovering, reviewing, and tracking movies, inspired by Letterboxd.",
+            "Developed a secure auth system using Supabase Auth and managed user data with Supabase (PostgreSQL).",
+            "Integrated the TMDB API to fetch real-time movie metadata, ratings, and cast details.",
+            "Designed a RESTful backend using Hono, enabling scalable and efficient API endpoints.",
+        ],
+        tags: [
+            "React",
+            "TypeScript",
+            "Hono",
+            "PostgreSQL",
+            "Supabase",
+            "TMDb API",
+        ],
+        repo: "https://github.com/Vignesh-Venkatesh/MovieBoxd",
+        live: "https://movieboxd.vigneshvenkatesh.com",
+    },
+    {
+        title: "vtop",
+        bullets: [
+            "Built a real-time Linux system monitor in C++ using procfs parsing, and filesystem traversal to surface live process and memory metrics across a terminal UI",
+            "Implemented process table with dynamic sorting by memory consumption, parsing /proc/[pid]/stat and /proc/[pid]/cmdline for all active PIDs with graceful error handling on process exit",
+            "Computed accurate per-core CPU usage via busy/idle tick deltas between sampling intervals, correctly accounting for user, nice, system, IRQ, softIRQ, steal, and iowait time categories",
+        ],
+        tags: ["C++"],
+        repo: "https://github.com/Vignesh-Venkatesh/vtop",
+        live: null,
+    },
+];
+---
+
+<section id="projects" class="py-10">
+    <p class="opacity-40 tracking-wider font-semibold text-xl mb-2">
+        /projects
+    </p>
+
+    <div class="flex flex-col">
+        {
+            projects.map((project) => (
+                <div class="border-l-2 border-[#4a6a62] hover:border-[#01df72] p-4 group transition duration-300 my-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h1 class="text-lg font-bold text-[#01df72]/80 transition duration-300">
+                            {project.title}
+                        </h1>
+                        <div class="flex gap-2">
+                            {project.repo && (
+                                <a
+                                    href={project.repo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="rounded bg-[#003843] px-3 py-2 border-b-2  border border-[#1e3a40] hover:bg-slate-900 transition-colors"
+                                >
+                                    <FaGithub className="w-4 h-4" />
+                                </a>
+                            )}
+                            {project.live && (
+                                <a
+                                    href={project.live}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="rounded bg-[#003843] px-3 py-2 border-b-2  border border-[#1e3a40] hover:bg-slate-900 transition-colors"
+                                >
+                                    <FiExternalLink className="w-4 h-4" />
+                                </a>
+                            )}
+                        </div>
+                    </div>
+
+                    <ul class="flex flex-col gap-1 mb-3">
+                        {project.bullets.map((bullet) => (
+                            <li class="leading-relaxed opacity-85">
+                                <span class="text-[#4a6a62]">•</span> {bullet}
+                            </li>
+                        ))}
+                    </ul>
+
+                    <div class="flex gap-2 flex-wrap">
+                        {project.tags.map((tag) => (
+                            <span class="rounded opacity-85 font-medium bg-slate-900 border-b-2  border border-[#1e3a40] text-sm px-2 py-0.5">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+</section>
