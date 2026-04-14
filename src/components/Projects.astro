@@ -1,6 +1,7 @@
 ---
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
+import { FaPen } from "react-icons/fa";
 
 const projects = [
     {
@@ -32,17 +33,31 @@ const projects = [
         ],
         repo: "https://github.com/Vignesh-Venkatesh/MovieBoxd",
         live: "https://movieboxd.vigneshvenkatesh.com",
+        blog: null,
     },
+    // {
+    //     title: "vtop",
+    //     bullets: [
+    //         "Built a real-time Linux system monitor in C++ using procfs parsing, and filesystem traversal to surface live process and memory metrics across a terminal UI",
+    //         "Implemented process table with dynamic sorting by memory consumption, parsing /proc/[pid]/stat and /proc/[pid]/cmdline for all active PIDs with graceful error handling on process exit",
+    //         "Computed accurate per-core CPU usage via busy/idle tick deltas between sampling intervals, correctly accounting for user, nice, system, IRQ, softIRQ, steal, and iowait time categories",
+    //     ],
+    //     tags: ["C++"],
+    //     repo: "https://github.com/Vignesh-Venkatesh/vtop",
+    //     live: null,
+    //     blog: null,
+    // },
     {
-        title: "vtop",
+        title: "DNS Resolver",
         bullets: [
-            "Built a real-time Linux system monitor in C++ using procfs parsing, and filesystem traversal to surface live process and memory metrics across a terminal UI",
-            "Implemented process table with dynamic sorting by memory consumption, parsing /proc/[pid]/stat and /proc/[pid]/cmdline for all active PIDs with graceful error handling on process exit",
-            "Computed accurate per-core CPU usage via busy/idle tick deltas between sampling intervals, correctly accounting for user, nice, system, IRQ, softIRQ, steal, and iowait time categories",
+            "Implemented RFC 1035 DNS wire protocol from scratch in Go, parsing binary messages across a 3-hop resolution chain (root -> TLD -> authoritative).",
+            "Handled CNAME following, NS fallback when glue records are missing, compression pointer resolution, and circular pointer detection.",
+            "Wrote unit tests covering the query builder, serializer, and parser with zero external test dependencies, catching offset bugs and truncation errors before integration.",
         ],
-        tags: ["C++"],
-        repo: "https://github.com/Vignesh-Venkatesh/vtop",
+        tags: ["Go"],
+        repo: "https://github.com/Vignesh-Venkatesh/dns-resolver",
         live: null,
+        blog: "https://blog.vigneshvenkatesh.com/blog/dns-resolver-1",
     },
 ];
 ---
@@ -79,6 +94,16 @@ const projects = [
                                     class="rounded bg-[#003843] px-3 py-2 border-b-2  border border-[#1e3a40] hover:bg-slate-900 transition-colors"
                                 >
                                     <FiExternalLink className="w-4 h-4" />
+                                </a>
+                            )}
+                            {project.blog && (
+                                <a
+                                    href={project.blog}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="rounded bg-[#003843] px-3 py-2 border-b-2  border border-[#1e3a40] hover:bg-slate-900 transition-colors"
+                                >
+                                    <FaPen className="w-4 h-4" />
                                 </a>
                             )}
                         </div>
