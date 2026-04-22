@@ -1,41 +1,50 @@
----
-const skills = [
-    {
-        category: "languages",
-        items: "JavaScript, TypeScript, HTML, CSS, Python, Go, C, SQL",
-    },
-    {
-        category: "libraries, frameworks",
-        items: "React.js, TailwindCSS, DaisyUI, Hono, Express.js, Better-Auth",
-    },
-    {
-        category: "tools, platforms",
-        items: "Git, GitHub, Postman, Docker, Visual Studio Code",
-    },
-    {
-        category: "databases",
-        items: "PostgreSQL, SQLite",
-    },
-    {
-        category: "misc",
-        items: "NPM, Bun, Vite",
-    },
-];
----
+<section
+    class="scroll-mt-20 px-6 sm:px-8 py-6 lg:px-8 border-x border-separator/50 font-google"
+    id="skills"
+>
+    <!-- header -->
+    <div class="flex items-center gap-3">
+        <h1 class="font-bold text-tertiary text-xl">/skills</h1>
+        <div class="flex-1 h-px bg-separator"></div>
+    </div>
 
-<section id="skills" class="py-10">
-    <p class="opacity-40 tracking-wider font-semibold text-xl mb-2">/skills</p>
+    <!-- content -->
+    <div class="mt-6 flex flex-col space-y-6 text-sm">
+        <!-- languages -->
+        <div>
+            <p class="text-tertiary text-xs mb-1">languages</p>
+            <p class="text-secondary">
+                JavaScript · TypeScript · HTML · CSS · Python · Go · C/C++ · SQL
+            </p>
+        </div>
 
-    <div class="grid grid-cols-2 grid-rows-5 gap-10 pt-4">
         {
-            skills.map(({ category, items }) => (
-
-                    <h1 class="text-lg font-bold text-[#01df72]/80 transition duration-300">
-                        [ {category} ]
-                    </h1>
-                    <h1 class="opacity-80">{items}</h1>
-
-            ))
+            // <!-- backend -->
+            // <div>
+            //     <p class="text-tertiary text-xs mb-1">backend</p>
+            //     <p class="text-secondary">Node.js · Express · Go · REST · gRPC</p>
+            // </div>
         }
+
+        <!-- libraries/frameworks -->
+        <div>
+            <p class="text-tertiary text-xs mb-1">libraries/frameworks</p>
+            <p class="text-secondary">
+                React.js · TailwindCSS · DaisyUI · ShadcnUI · Hono · Express.js
+                · Better-Auth
+            </p>
+        </div>
+
+        <!-- databases -->
+        <div>
+            <p class="text-tertiary text-xs mb-1">databases</p>
+            <p class="text-secondary">PostgreSQL · SQLite</p>
+        </div>
+
+        <!-- tools -->
+        <div>
+            <p class="text-tertiary text-xs mb-1">tools</p>
+            <p class="text-secondary">Git · Bun · Vite · Zed · VSCode</p>
+        </div>
     </div>
 </section>

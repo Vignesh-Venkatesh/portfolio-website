@@ -1,131 +1,204 @@
 ---
-import { FaGithub } from "react-icons/fa";
-import { FiExternalLink } from "react-icons/fi";
-import { FaPen } from "react-icons/fa";
+import HatchDivider from "../components/HatchDivider.astro";
+const featuredProjects = [
+  {
+    title: "MovieBoxd",
+    description:[
+      "Built a full-stack web application for discovering, reviewing, and tracking movies, inspired by Letterboxd.",
+      "Developed a secure auth system using Supabase Auth and managed user data with Supabase (PostgreSQL).",
+      "Integrated the TMDB API to fetch real-time movie metadata, ratings, and cast details.",
+      "Designed a RESTful backend using Hono, enabling scalable and efficient API endpoints."
+    ],
+    tech: ["React", "TypeScript", "Supabase", "Hono.js", "TMDb API"],
+    github: "https://github.com/Vignesh-Venkatesh/MovieBoxd",
+    live: "https://movieboxd.vigneshvenkatesh.com/",
+    blog: null,
+  },
+  {
+    title: "DNS Resolver",
+    description:[
+      "Implemented RFC 1035 DNS wire protocol from scratch in Go, parsing binary messages across a 3-hop resolution chain (root -> TLD -> authoritative).",
+      "Handled CNAME following, NS fallback when glue records are missing, compression pointer resolution, and circular pointer detection.",
+      "Wrote unit tests covering the query builder, serializer, and parser with zero external test dependencies, catching offset bugs and truncation errors before integration."
+    ],
+    tech: ["Go"],
+    github: "https://github.com/Vignesh-Venkatesh/dns-resolver",
+    live: null,
+    blog: "https://blog.vigneshvenkatesh.com/blog/dns-resolver-1",
+  },
+  {
+    title: "Dynamic Memory Allocator",
+    description: [
+      "Designed and implemented a dynamic memory allocator, optimizing memory management through efficient allocation and deallocation of blocks in a custom heap system.",
+      "Developed a segregated free list to organize memory into bins based on block sizes, improving allocation speed and reducing fragmentation.",
+      "Utilized 16-byte alignment for both allocated and free blocks, ensuring performance optimization and adhering to memory structure constraints."
+    ],
+    tech: ["C", "C++"],
+    github: "https://github.com/Vignesh-Venkatesh/DynamicMemoryAllocator",
+    live: null,
+    blog: null,
+  },
+];
 
-const projects = [
-    {
-        title: "Dynamic Memory Allocator",
-        bullets: [
-            "Designed and implemented a dynamic memory allocator, optimizing memory management through efficient allocation and deallocation of blocks in a custom heap system.",
-            "Developed a segregated free list to organize memory into bins based on block sizes, improving allocation speed and reducing fragmentation.",
-            "Utilized 16-byte alignment for both allocated and free blocks, ensuring performance optimization and adhering to memory structure constraints.",
-        ],
-        tags: ["C", "C++"],
-        repo: "https://github.com/Vignesh-Venkatesh/DynamicMemoryAllocator",
-        live: null,
-    },
-    {
-        title: "Movieboxd",
-        bullets: [
-            "Built a full-stack web application for discovering, reviewing, and tracking movies, inspired by Letterboxd.",
-            "Developed a secure auth system using Supabase Auth and managed user data with Supabase (PostgreSQL).",
-            "Integrated the TMDB API to fetch real-time movie metadata, ratings, and cast details.",
-            "Designed a RESTful backend using Hono, enabling scalable and efficient API endpoints.",
-        ],
-        tags: [
-            "React",
-            "TypeScript",
-            "Hono",
-            "PostgreSQL",
-            "Supabase",
-            "TMDb API",
-        ],
-        repo: "https://github.com/Vignesh-Venkatesh/MovieBoxd",
-        live: "https://movieboxd.vigneshvenkatesh.com",
-        blog: null,
-    },
-    // {
-    //     title: "vtop",
-    //     bullets: [
-    //         "Built a real-time Linux system monitor in C++ using procfs parsing, and filesystem traversal to surface live process and memory metrics across a terminal UI",
-    //         "Implemented process table with dynamic sorting by memory consumption, parsing /proc/[pid]/stat and /proc/[pid]/cmdline for all active PIDs with graceful error handling on process exit",
-    //         "Computed accurate per-core CPU usage via busy/idle tick deltas between sampling intervals, correctly accounting for user, nice, system, IRQ, softIRQ, steal, and iowait time categories",
-    //     ],
-    //     tags: ["C++"],
-    //     repo: "https://github.com/Vignesh-Venkatesh/vtop",
-    //     live: null,
-    //     blog: null,
-    // },
-    {
-        title: "DNS Resolver",
-        bullets: [
-            "Implemented RFC 1035 DNS wire protocol from scratch in Go, parsing binary messages across a 3-hop resolution chain (root -> TLD -> authoritative).",
-            "Handled CNAME following, NS fallback when glue records are missing, compression pointer resolution, and circular pointer detection.",
-            "Wrote unit tests covering the query builder, serializer, and parser with zero external test dependencies, catching offset bugs and truncation errors before integration.",
-        ],
-        tags: ["Go"],
-        repo: "https://github.com/Vignesh-Venkatesh/dns-resolver",
-        live: null,
-        blog: "https://blog.vigneshvenkatesh.com/blog/dns-resolver-1",
-    },
+const otherProjects = [
+  {
+    title: "vtop",
+    description: "htop-like system monitor",
+    github: "https://github.com/Vignesh-Venkatesh/vtop",
+    live: null,
+    blog: null
+  },
+  {
+    title: "wordy",
+    description: "word count tool similar to Linux's wc.",
+    github: "https://github.com/Vignesh-Venkatesh/wordy",
+    live: null,
+    blog: null,
+  },
 ];
 ---
 
-<section id="projects" class="py-10">
-    <p class="opacity-40 tracking-wider font-semibold text-xl mb-2">
-        /projects
-    </p>
+<section
+  class="scroll-mt-20 px-6 sm:px-8 py-6 lg:px-8 border-x border-separator/50 font-google"
+  id="projects"
+>
+    <div class="flex items-center gap-3">
+        <h1 class="font-bold text-tertiary text-xl">/projects</h1>
+        <div class="flex-1 h-px bg-separator"></div>
+    </div>
 
-    <div class="flex flex-col">
-        {
-            projects.map((project) => (
-                <div class="border-l-2 border-[#4a6a62] hover:border-[#01df72] p-4 group transition duration-300 my-6">
-                    <div class="flex justify-between items-start mb-2">
-                        <h1 class="text-lg font-bold text-[#01df72]/80 transition duration-300">
-                            {project.title}
-                        </h1>
-                        <div class="flex gap-2">
-                            {project.repo && (
-                                <a
-                                    href={project.repo}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="rounded bg-[#003843] px-3 py-2 border-b-2  border border-[#1e3a40] hover:bg-slate-900 transition-colors"
-                                >
-                                    <FaGithub className="w-4 h-4" />
-                                </a>
-                            )}
-                            {project.live && (
-                                <a
-                                    href={project.live}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="rounded bg-[#003843] px-3 py-2 border-b-2  border border-[#1e3a40] hover:bg-slate-900 transition-colors"
-                                >
-                                    <FiExternalLink className="w-4 h-4" />
-                                </a>
-                            )}
-                            {project.blog && (
-                                <a
-                                    href={project.blog}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="rounded bg-[#003843] px-3 py-2 border-b-2  border border-[#1e3a40] hover:bg-slate-900 transition-colors"
-                                >
-                                    <FaPen className="w-4 h-4" />
-                                </a>
-                            )}
-                        </div>
-                    </div>
+    <!-- Featured Projects -->
+    <div class="mt-6 space-y-10">
+    {featuredProjects.map((project,i) => (
+        <div>
+        <!-- title, links -->
+        <div class="flex justify-between items-baseline">
+            <h2 class="text-secondary font-semibold">
+            {project.title}
+            </h2>
 
-                    <ul class="flex flex-col gap-1 mb-3">
-                        {project.bullets.map((bullet) => (
-                            <li class="leading-relaxed opacity-85">
-                                <span class="text-[#4a6a62]">•</span> {bullet}
-                            </li>
-                        ))}
-                    </ul>
+            <div class="flex gap-3 text-tertiary text-sm">
 
-                    <div class="flex gap-2 flex-wrap">
-                        {project.tags.map((tag) => (
-                            <span class="rounded opacity-85 font-medium bg-slate-900 border-b-2  border border-[#1e3a40] text-sm px-2 py-0.5">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
+                <!-- demo -->
+                {
+                  project.live && (
+                    <a
+                        href={project.live}
+                        target="_blank"
+                        class="hover:text-green transition-colors"
+                    >
+                        Demo
+                    </a>
+                  )
+                }
+
+                <!-- blog post -->
+                {
+                  project.blog && (
+                    <a
+                        href={project.blog}
+                        target="_blank"
+                        class="hover:text-green transition-colors"
+                    >
+                        Blog
+                    </a>
+                  )
+                }
+
+                <!-- github -->
+                {
+                  project.github && (
+                    <a
+                        href={project.github}
+                        target="_blank"
+                        class="hover:text-green transition-colors"
+                    >
+                        GitHub
+                    </a>
+                  )
+                }
+            </div>
+        </div>
+
+        <!-- description -->
+        <div class="my-4">
+            {project.description.map((pointer) => (
+                <div class="flex gap-2">
+                    <div>•</div>
+                    <p class="leading-relaxed text-justify text-sm text-secondary/90">{pointer}</p>
                 </div>
-            ))
-        }
+            ))}
+        </div>
+
+        <!-- tech -->
+        <p class="text-xs font-semibold text-tertiary mt-2">
+            {project.tech.join(" · ")}
+        </p>
+        </div>
+
+        <!-- rendering divider if not last -->
+        {i !== featuredProjects.length - 1 && <HatchDivider />}
+    ))}
+    </div>
+
+
+    <!-- Other Projects -->
+    <div class="mt-10">
+    <div class="flex items-center gap-3 mb-4">
+        <h1 class="font-bold text-tertiary text-md">other-projects</h1>
+        <div class="flex-1 h-px bg-separator"></div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4 text-sm">
+        {otherProjects.map((project) => (
+          <div class="flex flex-col border-separator border-b-2 border-r-2 pr-2">
+            <p class="text-secondary font-semibold">{project.title}</p>
+            <p class="my-2 text-justify text-sm text-secondary/90">{project.description}</p>
+
+              <!-- links -->
+              <div class="flex gap-3 text-tertiary mt-4 mb-2 justify-end">
+                  <!-- demo -->
+                  {
+                    project.live && (
+                      <a
+                          href={project.live}
+                          target="_blank"
+                          class="hover:text-green transition-colors"
+                      >
+                          Demo
+                      </a>
+                    )
+                  }
+
+                  <!-- blog post -->
+                  {
+                    project.blog && (
+                      <a
+                          href={project.blog}
+                          target="_blank"
+                          class="hover:text-green transition-colors"
+                      >
+                          Blog
+                      </a>
+                    )
+                  }
+
+                  <!-- github -->
+                  {
+                    project.github && (
+                      <a
+                          href={project.github}
+                          target="_blank"
+                          class="hover:text-green transition-colors"
+                      >
+                          GitHub
+                      </a>
+                    )
+                  }
+              </div>
+          </div>
+
+        ))}
+    </div>
     </div>
 </section>

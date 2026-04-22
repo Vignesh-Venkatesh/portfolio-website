@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import "../styles/global.css";
+import HatchDivider from "../components/HatchDivider.astro";
 import Navbar from "../components/Navbar.astro";
 import About from "../components/About.astro";
 import Experience from "../components/Experience.astro";
@@ -9,13 +9,41 @@ import Skills from "../components/Skills.astro";
 import Footer from "../components/Footer.astro";
 ---
 
-<Layout title="Vignesh Venkatesh | Portfolio">
-    <div class="mx-auto px-4 pt-6 sm:pt-12 w-full lg:w-2/3 xl:w-1/2">
-        <Navbar />
-        <About />
-        <Experience />
-        <Projects />
-        <Skills />
-    </div>
-    <Footer />
+<Layout>
+    <main>
+        <div class="sticky top-0 backdrop-blur-md">
+            <div class="max-w-3xl mx-auto">
+                <Navbar />
+            </div>
+            <HatchDivider />
+        </div>
+        <div class="max-w-3xl mx-auto">
+            <About />
+
+            <div class="space-y-5 border-x-separator/50 border-x">
+                <HatchDivider />
+            </div>
+
+            <Experience />
+
+            <div class="space-y-5 border-x-separator/50 border-x">
+                <HatchDivider />
+            </div>
+
+            <Projects />
+
+            <div class="space-y-5 border-x-separator/50 border-x">
+                <HatchDivider />
+            </div>
+
+            <Skills />
+
+            <div class="space-y-5 border-x-separator/50 border-x">
+                <HatchDivider />
+            </div>
+
+            <Footer />
+        </div>
+        <HatchDivider />
+    </main>
 </Layout>

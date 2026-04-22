@@ -1,4 +1,5 @@
 ---
+import HatchDivider from "../components/HatchDivider.astro";
 const experiences = [
     {
         title: "Distributed Control Systems — Intern",
@@ -25,46 +26,60 @@ const experiences = [
 ];
 ---
 
-<section id="experience" class="py-10">
-    <p class="opacity-40 tracking-wider font-semibold text-xl mb-2">
-        /experience
-    </p>
+<section
+    class="scroll-mt-20 px-6 sm:px-8 py-4 lg:px-8 border-x-separator/50 border-x font-google"
+    id="experience"
+>
+    <div class="flex items-center gap-3">
+      <h1 class="font-bold text-tertiary text-xl">/experience</h1>
+      <div class="flex-1 h-px bg-separator"></div>
+    </div>
 
     <div class="flex flex-col">
         {
-            experiences.map((exp) => (
-                <div class="border-l-2 border-[#4a6a62] hover:border-[#01df72] p-4 group transition duration-300 my-6">
-                    <div class="flex justify-between items-center gap-2">
-                        <div>
-                            <h1 class="text-lg font-bold text-[#01df72]/80 transition duration-300">
-                                {exp.title}
-                            </h1>
+          experiences.map((exp, i) => (
+            <>
+              <div class="my-4">
+                <!-- title, company, location, date -->
+                <div class="flex justify-between items-baseline">
+                  <div>
+                    <p class="text-md font-semibold text-secondary">
+                      {exp.title}
+                    </p>
+                    <p class="text-xs text-tertiary">
+                      <span class="italic">at</span>, {exp.company}
+                    </p>
 
-                            <h1 class="text-[#4a6a62] text-sm font-semibold">
-                                <span class="italic font-medium">at</span>,{" "}
-                                {exp.company}
-                            </h1>
-
-                            <div class="block sm:hidden text-sm text-[#4a6a62]">
-                                <h1>{exp.location}</h1>
-                                <h1>{exp.date}</h1>
-                            </div>
-                        </div>
-
-                        <div class="hidden sm:block text-sm  text-[#4a6a62]">
-                            <h1>{exp.date}</h1>
-                            <h1>{exp.location}</h1>
-                        </div>
+                    <div class="block
+                    sm:hidden text-xs text-tertiary">
+                      <p>{exp.location}</p>
+                      <p>{exp.date}</p>
                     </div>
-                    <ul class="flex flex-col gap-1 mt-2">
-                        {exp.bullets.map((bullet) => (
-                            <li class="leading-relaxed opacity-85">
-                                <span class="text-[#4a6a62]">•</span> {bullet}
-                            </li>
-                        ))}
-                    </ul>
+                  </div>
+
+                  <div class="hidden sm:block text-sm text-end text-tertiary">
+                    <p class="text-xs">{exp.date}</p>
+                    <p class="text-xs">{exp.location}</p>
+                  </div>
                 </div>
-            ))
+
+                <!-- bullets -->
+                <div class="mt-4">
+                  {exp.bullets.map((bullet) => (
+                    <div class="flex gap-2">
+                      <div>•</div>
+                      <div class="leading-relaxed text-justify text-sm text-secondary/90">
+                        <p>{bullet}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- rendering divider if not last -->
+              {i !== experiences.length - 1 && <HatchDivider />}
+            </>
+          ))
         }
     </div>
 </section>

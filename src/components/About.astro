@@ -1,20 +1,5 @@
 ---
-import { FaGithub, FaLinkedin, FaLinkedinIn } from "react-icons/fa";
-import { FiLinkedin } from "react-icons/fi";
-
-const links = [
-    { label: "Resume", href: "/resume.pdf", icon: false },
-    {
-        label: "GitHub",
-        href: "https://github.com/Vignesh-Venkatesh",
-        icon: true,
-    },
-    {
-        label: "LinkedIn",
-        href: "https://linkedin.com/in/vignesh-2k3",
-        icon: true,
-    },
-];
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 const birthdate = new Date("2003");
 const age = Math.floor(
@@ -22,51 +7,64 @@ const age = Math.floor(
 );
 ---
 
-<section class="py-14">
-    <p class="text-sm mb-2">hey 👋, I'm</p>
-
-    <!-- name -->
-    <h1 class="text-4xl font-bold opacity-95 mb-1">
-        Vignesh Venkatesh
-        <span class="text-sm italic font-normal text-[#4a6a62]"
+<section
+    class="scroll-mt-20 px-6 sm:px-8 pt-10 pb-5 lg:px-8 border-x-separator/50 border-x font-google"
+    id="about"
+>
+    <p class="text-tertiary text-sm">hey 👋, I'm</p>
+    <div class="flex items-baseline gap-3 my-4">
+        <p class="text-4xl font-bold text-secondary">Vignesh Venkatesh</p>
+        <span class="italic text-xs text-tertiary hidden sm:block"
             >{age} he/him</span
         >
-    </h1>
-
-    <!-- tagline -->
-    <p class="opacity-90 text-sm my-4">
-        gruvbox is <span class="animate-pulse">💚</span>
-    </p>
-
-    <!-- buttons -->
-    <div class="flex gap-3 mb-12">
-        {
-            links.map(({ label, href, icon }) => (
-                <a href={href} target="_blank" rel="noopener noreferrer">
-                    <button class="bg-green-400 px-3 py-2 rounded text-sm text-gray-950/85 font-semibold border-b-2 border-[#00513b] cursor-pointer hover:bg-green-400/90 duration-200">
-                        {icon && label == "GitHub" && (
-                            <FaGithub className="w-5 h-5" />
-                        )}
-                        {icon && label == "LinkedIn" && (
-                            <FaLinkedinIn className="w-5 h-5" />
-                        )}
-                        {!icon && <p>{label}</p>}
-                    </button>
-                </a>
-            ))
-        }
     </div>
 
-    <p class="opacity-40 tracking-wider font-semibold text-xl mb-2">/me</p>
-    <p class="">
-        I'm a Masters student at
+    <div>
+        <p class="text-sm text-secondary">
+            M.S. Computer Science <a
+                class="text-secondary hover:opacity-60 transition-opacity font-semibold"
+                href="https://nyu.edu"
+                target="_blank">@NYU</a
+            >, specializing in Systems. Previously <a
+                class="text-secondary hover:opacity-60 transition-opacity font-semibold"
+                href="https://www.yokogawa.com"
+                target="_blank">@Yokogawa Electric</a
+            >
+            and Penn State. Currently looking for SWE roles.
+        </p>
+    </div>
+
+    <!-- links -->
+    <div class="text-sm mt-5 flex items-center gap-4 text-tertiary">
+        <!-- resume -->
         <a
-            class="hover:text-violet-400 duration-300 cursor-pointer"
-            href="https://nyu.edu"
+            href="resume.pdf"
             target="_blank"
+            class="hover:text-secondary transition-colors duration-150"
         >
-            New York University (NYU)
-        </a>, pursuing an M.S. in Computer Science with a potential
-        specialization in Systems.
-    </p>
+            Resume
+        </a>
+
+        <!-- github -->
+        <a
+            href="https://github.com/Vignesh-Venkatesh"
+            target="_blank"
+            aria-label="GitHub profile"
+            class="inline-flex items-center gap-1 hover:text-secondary transition-colors duration-150"
+        >
+            <FaGithub />
+            GitHub
+        </a>
+
+        <!-- linkedin -->
+        <a
+            href="https://linkedin.com/in/vignesh-2k3"
+            target="_blank"
+            aria-label="LinkedIn profile"
+            class="inline-flex items-center gap-1 hover:text-secondary transition-colors duration-150"
+        >
+            <FaLinkedinIn />
+            LinkedIn
+        </a>
+    </div>
 </section>
