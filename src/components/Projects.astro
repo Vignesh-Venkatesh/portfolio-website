@@ -41,19 +41,26 @@ const featuredProjects = [
 ];
 
 const otherProjects = [
-  {
-    title: "vtop",
-    description: "htop-like system monitor",
-    github: "https://github.com/Vignesh-Venkatesh/vtop",
-    live: null,
-    blog: null
-  },
+  // {
+  //   title: "vtop",
+  //   description: "htop-like system monitor",
+  //   github: "https://github.com/Vignesh-Venkatesh/vtop",
+  //   live: null,
+  //   blog: null
+  // },
   {
     title: "wordy",
     description: "word count tool similar to Linux's wc.",
     github: "https://github.com/Vignesh-Venkatesh/wordy",
     live: null,
     blog: null,
+  },
+  {
+    title: "movieboxd LLM users",
+    description: "to simulate user activity on my LetterBoxd clone - 'MovieBoxd'.",
+    github: "https://github.com/Vignesh-Venkatesh/MovieBoxd-LLM-Users",
+    blog: "https://blog.vigneshvenkatesh.com/moviboxd-llm-users",
+    live: null
   },
 ];
 ---
@@ -151,9 +158,11 @@ const otherProjects = [
 
     <div class="grid sm:grid-cols-2 gap-4 text-sm">
         {otherProjects.map((project) => (
-          <div class="flex flex-col border-separator border-b-2 border-r-2 pr-2">
-            <p class="text-secondary font-semibold">{project.title}</p>
-            <p class="my-2 text-justify text-sm text-secondary/90">{project.description}</p>
+          <div class="flex flex-col justify-between border-separator border-b-2 border-r-2 pr-2">
+              <div>
+                <p class="text-secondary font-semibold">{project.title}</p>
+                <p class="my-2 text-justify text-sm text-secondary/90">{project.description}</p>
+              </div>
 
               <!-- links -->
               <div class="flex gap-3 text-tertiary mt-4 mb-2 justify-end">
