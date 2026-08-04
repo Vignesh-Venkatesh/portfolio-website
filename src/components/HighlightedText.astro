@@ -1,0 +1,22 @@
+---
+interface Props {
+  text: string;
+  keywords: string[];
+}
+
+const { text, keywords } = Astro.props;
+const orderedKeywords = [...keywords].sort((a, b) => b.length - a.length);
+const escapedKeywords = orderedKeywords.map((keyword) =>
+  keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+);
+const parts = escapedKeywords.length
+  ? text.split(new RegExp(`(${escapedKeywords.join("|")})`, "gi"))
+  : [text];
+
+const isKeyword = (part: string) =>
+  orderedKeywords.some((keyword) => keyword.toLowerCase() === part.toLowerCase());
+---
+
+{parts.map((part) =>
+  isKeyword(part) ? <strong class="font-semibold">{part}</strong> : part,
+)}

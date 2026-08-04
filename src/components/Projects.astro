@@ -1,27 +1,15 @@
 ---
 import HatchDivider from "../components/HatchDivider.astro";
+import HighlightedText from "../components/HighlightedText.astro";
 const featuredProjects = [
-  {
-    title: "MovieBoxd",
-    description:[
-      "Built a full-stack web application for discovering, reviewing, and tracking movies, inspired by Letterboxd.",
-      "Developed a secure auth system using Supabase Auth and managed user data with Supabase (PostgreSQL).",
-      "Integrated the TMDB API to fetch real-time movie metadata, ratings, and cast details.",
-      "Designed a RESTful backend using Hono, enabling scalable and efficient API endpoints."
-    ],
-    tech: ["React", "TypeScript", "Supabase", "Hono.js", "TMDb API"],
-    github: "https://github.com/Vignesh-Venkatesh/MovieBoxd",
-    live: "https://movieboxd.vigneshvenkatesh.com/",
-    blog: null,
-  },
   {
     title: "DNS Resolver",
     description:[
-      "Implemented RFC 1035 DNS wire protocol from scratch in Go, parsing binary messages across a 3-hop resolution chain (root -> TLD -> authoritative).",
-      "Handled CNAME following, NS fallback when glue records are missing, compression pointer resolution, and circular pointer detection.",
-      "Wrote unit tests covering the query builder, serializer, and parser with zero external test dependencies, catching offset bugs and truncation errors before integration."
+      "Implemented an iterative DNS resolver in Go from scratch following RFC 1035, parsing binary DNS packets across a multi-hop resolution chain.",
+      "Handled CNAME traversal, nameserver fallback when glue records were unavailable, compression pointer resolution, and circular pointer detection.",
+      "Wrote unit tests for the query builder, serializer, and parser, identifying offset and packet truncation errors"
     ],
-    tech: ["Go"],
+    tech: ["Go", "DNS", "Network Protocols", "Binary Serialization", "Unit Testing"],
     github: "https://github.com/Vignesh-Venkatesh/dns-resolver",
     live: null,
     blog: "https://blog.vigneshvenkatesh.com/blog/dns-resolver-1",
@@ -29,15 +17,45 @@ const featuredProjects = [
   {
     title: "Dynamic Memory Allocator",
     description: [
-      "Designed and implemented a dynamic memory allocator, optimizing memory management through efficient allocation and deallocation of blocks in a custom heap system.",
-      "Developed a segregated free list to organize memory into bins based on block sizes, improving allocation speed and reducing fragmentation.",
-      "Utilized 16-byte alignment for both allocated and free blocks, ensuring performance optimization and adhering to memory structure constraints."
+      "Built a malloc/free-style dynamic memory allocator in C++, implementing custom heap allocation, deallocation, splitting, and block coalescing.",
+      "Developed a segregated free-list structure that organized memory blocks by size class, improving allocation efficiency and reducing fragmentation.",
+      "Enforced 16-byte alignment for allocated and free blocks while maintaining block metadata and heap consistency."
     ],
-    tech: ["C", "C++"],
+    tech: ["C++", "Memory Management", "Data Structures", "Systems Programming"],
     github: "https://github.com/Vignesh-Venkatesh/DynamicMemoryAllocator",
     live: null,
     blog: null,
   },
+  {
+    title: "MovieBoxd",
+    description:[
+      "Built a full-stack movie discovery and tracking platform supporting authentication, ratings, reviews, and user watchlists.",
+      "Designed RESTful backend services using Hono and PostgreSQL to manage user, review, and movie-related data.",
+      "Implemented authentication with Supabase Auth and integrated the TMDB API to retrieve real-time movie metadata, ratings, and cast information.",
+    ],
+    tech: ["React", "TypeScript", "Hono", "PostgreSQL", "Supabase", "REST APIs", "TMDb API"],
+    github: "https://github.com/Vignesh-Venkatesh/MovieBoxd",
+    live: "https://movieboxd.vigneshvenkatesh.com/",
+    blog: null,
+  },
+];
+
+const projectKeywords = [
+  [
+    ["iterative DNS resolver in Go", "RFC 1035"],
+    ["CNAME traversal", "nameserver fallback", "compression pointer resolution"],
+    ["dependency-free unit tests", "offset and packet truncation errors"],
+  ],
+  [
+    ["malloc/free-style dynamic memory allocator in C++"],
+    ["segregated free-list structure"],
+    ["16-byte alignment"],
+  ],
+  [
+    ["full-stack movie discovery and tracking platform"],
+    ["RESTful backend services", "Hono and PostgreSQL"],
+    ["Supabase Auth", "TMDB API"],
+  ],
 ];
 
 const otherProjects = [
@@ -77,6 +95,7 @@ const otherProjects = [
     <!-- Featured Projects -->
     <div class="mt-6 space-y-10">
     {featuredProjects.map((project,i) => (
+        <>
         <div>
         <!-- title, links -->
         <div class="flex justify-between items-baseline">
@@ -129,10 +148,15 @@ const otherProjects = [
 
         <!-- description -->
         <div class="my-4">
-            {project.description.map((pointer) => (
+            {project.description.map((pointer, pointerIndex) => (
                 <div class="flex gap-2">
                     <div>•</div>
-                    <p class="leading-relaxed text-justify text-sm text-secondary/90">{pointer}</p>
+                    <p class="leading-relaxed text-justify text-sm text-secondary/90">
+                        <HighlightedText
+                            text={pointer}
+                            keywords={projectKeywords[i]?.[pointerIndex] ?? []}
+                        />
+                    </p>
                 </div>
             ))}
         </div>
@@ -145,6 +169,7 @@ const otherProjects = [
 
         <!-- rendering divider if not last -->
         {i !== featuredProjects.length - 1 && <HatchDivider />}
+        </>
     ))}
     </div>
 

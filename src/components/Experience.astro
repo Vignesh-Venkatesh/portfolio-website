@@ -1,28 +1,56 @@
 ---
 import HatchDivider from "../components/HatchDivider.astro";
+import HighlightedText from "../components/HighlightedText.astro";
 const experiences = [
     {
-        title: "Distributed Control Systems — Intern",
+        title: "Software Engineering Intern",
+        company: "MiraPhoto",
+        date: "June 2026 – Aug 2026",
+        location: "New York City, NY",
+        bullets: [
+          "Built a model feed feature using Expo, React Native, and TypeScript, implementing image upload workflows and responsive feed rendering.",
+          "Designed and implemented the backend architecture supporting model uploads, image storage, retrieval, and display.",
+          "Reduced image loading latency by approximately 85% through optimized image delivery and application data flows.",
+          "Investigated and methodically resolved high-priority P0 production issues, improving application stability and release quality.",
+          "Bootstrapped a CI/CD pipeline using YAML workflows and GitHub Actions, automating builds and deployments through a self-hosted Mac Mini runner."
+        ],
+    },
+    {
+        title: "Distributed Control Systems Intern",
         company: "Yokogawa Electric",
         date: "May 2024 – June 2024",
         location: "Abu Dhabi, U.A.E",
         bullets: [
-            "Executed inspections of DCS cabinets, ensuring adherence to functional design specifications.",
-            "Developed alarm suppression systems, step function, and moving average block for industrial plant monitoring systems.",
-            "Assisted in managing project engineering life cycles, contributing to the inception stage.",
+            "Learned SEBOL, Yokogawa’s proprietary C-based control language, and began developing production code within one week.",
+            "Developed alarm suppression logic, a step function, and a moving average function block for industrial plant monitoring.",
+            "Supported project engineering workflows using GitHub Issues, GitHub Actions, and project planning tools to prioritize bugs and coordinate work across a 3–5 member engineering team.",
         ],
     },
     {
-        title: "Digital Design Course — Learning Assistant",
+        title: "Digital Design Course Learning Assistant",
         company: "The Pennsylvania State University",
         date: "Aug 2023 – May 2025",
         location: "State College, PA",
         bullets: [
-            "Managed and moderated an online class forum, providing feedback on student posts and facilitating discussions.",
-            "Assisted the professor in grading assignments, ensuring timely and accurate evaluation of 200+ submissions per week.",
-            "Collaborated with the professor and other teaching assistants to develop course materials and content.",
+            "Moderated course discussions, provided technical feedback to students, graded 200+ assignments weekly, and collaborated with faculty and teaching assistants to develop digital design course materials.",
         ],
     },
+];
+
+const experienceKeywords = [
+    [
+        ["model feed feature", "Expo, React Native, and TypeScript"],
+        ["backend architecture", "model uploads", "image storage", "retrieval", "display"],
+        ["image loading latency by approximately 85%", "optimized image delivery"],
+        ["high-priority P0 production issues"],
+        ["CI/CD pipeline", "YAML workflows and GitHub Actions", "self-hosted Mac Mini runner"],
+    ],
+    [
+        ["SEBOL", "C-based control language", "production code within one week"],
+        ["alarm suppression logic", "step function", "moving average function block"],
+        ["GitHub Issues, GitHub Actions, and project planning tools", "3–5 member engineering team"],
+    ],
+    [["graded 200+ assignments weekly", "digital design course materials"]],
 ];
 ---
 
@@ -65,11 +93,16 @@ const experiences = [
 
                 <!-- bullets -->
                 <div class="mt-4">
-                  {exp.bullets.map((bullet) => (
+                  {exp.bullets.map((bullet, bulletIndex) => (
                     <div class="flex gap-2">
                       <div>•</div>
                       <div class="leading-relaxed text-justify text-sm text-secondary/90">
-                        <p>{bullet}</p>
+                        <p>
+                          <HighlightedText
+                            text={bullet}
+                            keywords={experienceKeywords[i]?.[bulletIndex] ?? []}
+                          />
+                        </p>
                       </div>
                     </div>
                   ))}
