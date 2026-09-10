@@ -3,13 +3,11 @@ const links = [
     { label: "experience", href: "#experience" },
     { label: "projects", href: "#projects" },
     { label: "skills", href: "#skills" },
-    { label: "blog", href: "https://blog.vigneshvenkatesh.com" },
+    // { label: "blog", href: "https://blog.vigneshvenkatesh.com" },
 ];
 ---
 
-<nav
-    class="px-6 sm:px-8 py-4 lg:px-8 font-geist flex items-center justify-between"
->
+<nav class="px-6 sm:px-8 py-4 lg:px-8 font-geist flex items-center justify-between">
     <a href="#about" class="flex items-center gap-2">
         <img
             src="https://avatars.githubusercontent.com/u/78854880"
@@ -21,21 +19,19 @@ const links = [
     </a>
 
     <div class="hidden sm:flex gap-5 tracking-wide">
-        {
-            links.map(({ label, href }) => {
-                const isExternal = href.startsWith("http");
+        {links.map(({ label, href }) => {
+            const isExternal = href.startsWith("http");
 
-                return (
-                    <a
-                        href={href}
-                        target={isExternal ? "_blank" : undefined}
-                        rel={isExternal ? "noopener noreferrer" : undefined}
-                        class="text-tertiary hover:text-green transition-colors duration-200"
-                    >
-                        {label}
-                    </a>
-                );
-            })
-        }
+            return (
+                <a
+                    href={href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    class="text-tertiary hover:text-green transition-colors duration-200"
+                >
+                    {label}
+                </a>
+            );
+        })}
     </div>
 </nav>
