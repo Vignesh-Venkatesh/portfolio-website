@@ -1,0 +1,154 @@
+<div class="sign-slot">
+<a
+    class="hire-sign"
+    data-revealed="false"
+    href="/resume.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="For hire — view my resume"
+>
+    <span class="sign-cutout">
+        <span class="sign-assembly">
+            <span class="sign-board">for hire</span>
+            <span class="sign-post" aria-hidden="true"></span>
+        </span>
+    </span>
+</a>
+</div>
+
+<style>
+    .sign-slot {
+        position: relative;
+        align-self: stretch;
+        flex-shrink: 0;
+        width: 76px;
+        margin-inline: auto;
+    }
+
+    .hire-sign {
+        position: absolute;
+        bottom: -2rem;
+        display: block;
+        width: 76px;
+        height: 68px;
+        color: var(--color-accent);
+        text-shadow: none;
+        pointer-events: none;
+    }
+
+    .hire-sign[data-revealed="true"] {
+        pointer-events: auto;
+    }
+
+    .sign-cutout {
+        display: block;
+        height: 100%;
+        overflow: visible;
+        clip-path: inset(-12px -16px 0 -16px);
+    }
+
+    .sign-assembly {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px;
+        transform-origin: 50% 100%;
+        transform: translateY(70px) rotate(7deg);
+        opacity: 0;
+        transition: transform 650ms cubic-bezier(0.2, 0.8, 0.25, 1), opacity 350ms ease;
+    }
+
+    .hire-sign[data-revealed="true"] .sign-assembly {
+        transform: translateY(0) rotate(-4deg);
+        opacity: 1;
+    }
+
+    .sign-board {
+        position: relative;
+        display: flex;
+        width: 72px;
+        height: 30px;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid color-mix(in srgb, var(--color-accent) 55%, #000);
+        background: #07160d;
+        font-family: var(--font-google);
+        font-size: 11px;
+        line-height: 1;
+        letter-spacing: normal;
+        box-shadow: 0 3px 8px #0008;
+        transition: background 200ms ease, border-color 200ms ease;
+    }
+
+    .sign-board::before,
+    .sign-board::after {
+        position: absolute;
+        top: 13px;
+        width: 2px;
+        height: 2px;
+        background: currentColor;
+        opacity: 0.5;
+        content: "";
+    }
+
+    .sign-board::before { left: 4px; }
+    .sign-board::after { right: 4px; }
+
+    .sign-post {
+        width: 7px;
+        flex: 1;
+        border-inline: 1px solid #40684a;
+        background: #112b19;
+    }
+
+    .hire-sign:hover .sign-board,
+    .hire-sign:focus-visible .sign-board {
+        background: #10291a;
+        border-color: var(--color-accent);
+    }
+
+    .hire-sign:focus-visible {
+        outline: 1px solid var(--color-accent);
+        outline-offset: 4px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .sign-assembly {
+            transition: none;
+        }
+
+        .sign-board { transition: none; }
+    }
+</style>
+
+<script>
+    const sign = document.querySelector<HTMLAnchorElement>(".hire-sign");
+    const about = document.querySelector<HTMLElement>("#about");
+    const alwaysVisible = matchMedia("(hover: none), (pointer: coarse), (max-width: 39.999rem)");
+    let hideTimer: ReturnType<typeof setTimeout>;
+
+    function updateSign() {
+        clearTimeout(hideTimer);
+        if (sign) {
+            sign.dataset.revealed = String(alwaysVisible.matches
+                || about?.matches(":hover")
+                || sign.matches(":hover, :focus-visible"));
+        }
+    }
+
+    function deferHide() {
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(updateSign, 100);
+    }
+
+    about?.addEventListener("pointerenter", updateSign);
+    about?.addEventListener("pointerleave", deferHide);
+    sign?.addEventListener("pointerenter", updateSign);
+    sign?.addEventListener("pointerleave", deferHide);
+    sign?.addEventListener("focus", updateSign);
+    sign?.addEventListener("blur", deferHide);
+    alwaysVisible.addEventListener("change", updateSign);
+    updateSign();
+</script>
