@@ -1,0 +1,190 @@
+---
+import DitheredLandscape from "./DitheredLandscape.astro";
+const sectionBase = Astro.url.pathname === "/" ? "" : "/";
+---
+
+<header id="top" class="landscape-header">
+<DitheredLandscape />
+<nav
+    aria-label="main navigation"
+    class="relative z-10 mx-auto flex min-h-48 max-w-176 flex-wrap items-center justify-between gap-4 px-5 py-8 font-google text-muted sm:px-6"
+>
+    <a href="/" aria-label="Vigi — home" class="flex items-center gap-3">
+        <img
+            src="https://avatars.githubusercontent.com/u/78854880"
+            alt=""
+            class="w-12 rounded-full"
+        />
+        <span class="font-google font-semibold text-foreground">vigi.</span>
+    </a>
+    <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="header-links"
+    >
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+            <path class="horizon-top" d="M4 9h14" />
+            <path class="horizon-bottom" d="M10 19h14" />
+            <path class="horizon-star" d="m22 5 1.3 3.7L27 10l-3.7 1.3L22 15l-1.3-3.7L17 10l3.7-1.3Z" />
+        </svg>
+    </button>
+    <div id="header-links" class="header-links font-google tracking-normal">
+        <a class="transition-colors hover:font-semibold hover:text-accent" href={`${sectionBase}#education`}>education</a>
+        <a class="transition-colors hover:font-semibold hover:text-accent" href={`${sectionBase}#experience`}>experience</a>
+        <a class="transition-colors hover:font-semibold hover:text-accent" href={`${sectionBase}#projects`}>projects</a>
+        <a class="transition-colors hover:font-semibold hover:text-accent" href={`${sectionBase}#skills`}>skills</a>
+    </div>
+</nav>
+</header>
+
+<style>
+    .landscape-header {
+        position: relative;
+        isolation: isolate;
+        z-index: 2;
+        width: 100%;
+        border-bottom: 1px solid var(--color-border);
+        background: color-mix(in srgb, var(--color-accent) 4%, #000);
+    }
+
+    .landscape-header::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background: linear-gradient(90deg, transparent, #0006 25%, #0009 50%, #0006 75%, transparent);
+        pointer-events: none;
+    }
+
+    nav {
+        text-shadow: 0 1px 6px #000;
+    }
+
+    .header-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.25rem;
+    }
+
+    .menu-toggle {
+        display: none;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-muted);
+        cursor: pointer;
+        transition: color 180ms ease;
+    }
+
+    .menu-toggle:hover {
+        color: var(--color-accent);
+    }
+
+    .menu-toggle:focus-visible {
+        outline: 1px solid var(--color-accent);
+        outline-offset: 4px;
+    }
+
+    .horizon-top,
+    .horizon-bottom,
+    .horizon-star {
+        transform-origin: 14px 14px;
+        transition: transform 250ms ease, opacity 180ms ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] .horizon-top {
+        transform: translate(3px, 5px) rotate(45deg);
+    }
+
+    .horizon-top,
+    .horizon-bottom {
+        transform-box: fill-box;
+        transform-origin: center;
+    }
+
+    .menu-toggle[aria-expanded="true"] .horizon-bottom {
+        transform: translate(-3px, -5px) rotate(-45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] .horizon-star {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    @media (max-width: 39.999rem) {
+        .menu-toggle {
+            display: flex;
+        }
+
+        .header-links {
+            position: absolute;
+            top: calc(50% + 30px);
+            left: auto;
+            right: 1.25rem;
+            width: 12rem;
+            max-width: calc(100% - 2.5rem);
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 0;
+            padding: 0.25rem;
+            border: 1px solid var(--color-border);
+            background: #050d08f5;
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity 200ms ease, transform 200ms ease, visibility 200ms;
+        }
+
+        .header-links a {
+            padding: 0.625rem 0.875rem;
+            text-align: end;
+        }
+
+        .header-links a:hover,
+        .header-links a:focus-visible {
+            background: #4ade800a;
+        }
+
+        .menu-toggle[aria-expanded="true"] + .header-links {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .header-links,
+        .menu-toggle path {
+            transition: none;
+        }
+    }
+</style>
+
+<script>
+    const toggle = document.querySelector<HTMLButtonElement>(".menu-toggle");
+    const links = document.querySelector<HTMLElement>("#header-links");
+    const mobile = matchMedia("(max-width: 39.999rem)");
+
+    function setMenu(open: boolean) {
+        toggle?.setAttribute("aria-expanded", String(open));
+        toggle?.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+        if (links) links.inert = mobile.matches && !open;
+    }
+
+    setMenu(false);
+    toggle?.addEventListener("click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
+    links?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => setMenu(false)));
+    mobile.addEventListener("change", () => setMenu(false));
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && toggle?.getAttribute("aria-expanded") === "true") {
+            setMenu(false);
+            toggle.focus();
+        }
+    });
+    document.addEventListener("click", (event) => {
+        if (event.target instanceof Node && !toggle?.contains(event.target) && !links?.contains(event.target)) setMenu(false);
+    });
+</script>

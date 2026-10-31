@@ -1,0 +1,61 @@
+---
+import { ArrowLeft } from "@lucide/astro";
+import DitheredLandscape from "../components/DitheredLandscape.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="robots" content="noindex" />
+        <meta name="description" content="This page could not be found. Return to Vignesh's portfolio." />
+        <title>404 | Vignesh</title>
+    </head>
+    <body class="not-found-page bg-background font-geist text-foreground">
+        <div class="scenery" aria-hidden="true">
+            <DitheredLandscape fullscreen />
+        </div>
+        <main class="relative z-10 mx-auto flex w-full max-w-176 items-center justify-center px-5 sm:px-6">
+            <section aria-labelledby="not-found-title" class="flex w-full flex-col items-center justify-center gap-5 py-14 text-center">
+                <p class="font-google text-8xl font-semibold tracking-tight text-accent sm:text-9xl">404</p>
+                <div class="space-y-2">
+                    <h1 id="not-found-title" class="text-2xl font-semibold">Page not found.</h1>
+                    <p class="max-w-sm text-body text-muted">This page may have moved, or the link might be incorrect.</p>
+                </div>
+                <a href="/" class="mt-2 flex min-h-11 w-fit items-center gap-2 font-google text-small tracking-normal text-muted transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                    <ArrowLeft size={16} strokeWidth={1.5} aria-hidden="true" />
+                    back to home
+                </a>
+            </section>
+        </main>
+    </body>
+</html>
+
+<style>
+    .not-found-page {
+        position: relative;
+        isolation: isolate;
+        min-height: 100svh;
+    }
+
+    .scenery {
+        position: fixed;
+        inset: 0;
+        background: #000;
+    }
+
+    .scenery::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background: radial-gradient(ellipse at center, #000c, #0007 45%, transparent 85%);
+        pointer-events: none;
+    }
+
+    main {
+        min-height: 100svh;
+        text-shadow: 0 2px 12px #000;
+    }
+</style>

@@ -1,69 +1,80 @@
 ---
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
-
-const birthdate = new Date("2003");
-const age = Math.floor(
-    (Date.now() - birthdate.getTime()) / (1000 * 60 * 60 * 24 * 365.25),
-);
+import SectionCorners from "./SectionCorners.astro";
+const profileLinks = [
+    { label: "Resume", href: "/resume.pdf" },
+    { label: "GitHub", href: "https://github.com/Vignesh-Venkatesh" },
+    { label: "LinkedIn", href: "https://linkedin.com/in/vignesh-2k3" },
+];
 ---
 
-<section
-    class="scroll-mt-20 px-6 sm:px-8 pt-10 pb-5 lg:px-8 border-x-separator/50 border-x font-google"
-    id="about"
->
-    <p class="text-tertiary text-sm">hey 👋, I'm</p>
-    <div class="flex items-baseline gap-3 my-4">
-        <p class="text-4xl font-bold text-secondary">Vignesh Venkatesh</p>
-        <span class="italic text-xs text-tertiary hidden sm:block"
-            >{age} he/him</span
-        >
-    </div>
+<section class="grid-section flex flex-col gap-3" id="about">
+    <SectionCorners seed="about" verticalOverflow={false} />
+    <p class="text-body">hey 👋, I'm</p>
 
-    <div>
-        <p class="text-sm text-secondary">
-            M.S. Computer Science <a
-                class="text-secondary hover:opacity-60 transition-opacity font-semibold"
+    <h1 class="text-4xl font-bold font-google">Vignesh Venkatesh</h1>
+
+    <div class="flex flex-col gap-1 text-body">
+        <p>
+            M.S. Computer Science{" "}
+            <a
                 href="https://nyu.edu"
-                target="_blank">@NYU</a
-            >, specializing in Systems. Currently <a
-                class="text-secondary hover:opacity-60 transition-opacity font-semibold"
-                href="https://www.miraphoto.net"
-                target="_blank">@MiraPhoto</a
-            >. Looking for full-time SWE roles.
+                class="font-semibold hover:text-muted transition-colors"
+            >
+                @NYU
+            </a>
+            , specializing in Systems. Graduating May 2027.
+        </p>
+
+        <p>
+            Previously{" "}
+            <a
+                href="https://www.miraphoto.net/"
+                class="font-semibold hover:text-muted transition-colors"
+            >
+                @MiraPhoto
+            </a>
+            {" and "}
+            <a
+                href="https://www.yokogawa.com/"
+                class="font-semibold hover:text-muted transition-colors"
+            >
+                @Yokogawa Electric
+            </a>
+            .
+        </p>
+
+        <!-- <p>
+            Interested in backend engineering, distributed systems, and building
+            things for the web.
+        </p> -->
+
+        <p class="text-muted">
+            Open to full-time software engineering opportunities starting Summer
+            2027, including frontend, backend, full-stack, and forward-deployed
+            engineering.
         </p>
     </div>
-
-    <!-- links -->
-    <div class="text-sm mt-5 flex items-center gap-4 text-tertiary">
-        <!-- resume -->
-        <a
-            href="resume.pdf"
-            target="_blank"
-            class="hover:text-secondary transition-colors duration-150"
-        >
-            Resume
-        </a>
-
-        <!-- github -->
-        <a
-            href="https://github.com/Vignesh-Venkatesh"
-            target="_blank"
-            aria-label="GitHub profile"
-            class="inline-flex items-center gap-1 hover:text-secondary transition-colors duration-150"
-        >
-            <FaGithub />
-            GitHub
-        </a>
-
-        <!-- linkedin -->
-        <a
-            href="https://linkedin.com/in/vignesh-2k3"
-            target="_blank"
-            aria-label="LinkedIn profile"
-            class="inline-flex items-center gap-1 hover:text-secondary transition-colors duration-150"
-        >
-            <FaLinkedinIn />
-            LinkedIn
-        </a>
-    </div>
+    <nav aria-label="Profile links" class="mt-2 flex flex-wrap items-center gap-4 font-google text-small tracking-normal">
+        {profileLinks.map((link) => (
+            <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center gap-1 text-muted transition-colors hover:text-accent"
+            >
+                {link.label === "GitHub" && (
+                    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 .3a12 12 0 0 0-3.793 23.385c.6.111.82-.261.82-.577v-2.234c-3.338.726-4.043-1.416-4.043-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.085 1.839 1.237 1.839 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.304-5.466-1.334-5.466-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23a11.52 11.52 0 0 1 6.006 0c2.291-1.552 3.297-1.23 3.297-1.23.654 1.652.243 2.873.119 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.805 5.624-5.478 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.216.694.825.576A12 12 0 0 0 12 .3Z" />
+                    </svg>
+                )}
+                {link.label === "LinkedIn" && (
+                    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 18 18" fill="currentColor">
+                        <circle cx="3" cy="3" r="1.6" />
+                        <path d="M1.5 6h3v10h-3ZM7 6h3v1.4C10.6 6.4 11.7 5.8 13 5.8c2.5 0 3.5 1.6 3.5 4.4V16h-3v-5.2c0-1.5-.4-2.3-1.6-2.3-1.3 0-1.9.9-1.9 2.6V16H7Z" />
+                    </svg>
+                )}
+                {link.label}
+            </a>
+        ))}
+    </nav>
 </section>

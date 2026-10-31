@@ -1,238 +1,214 @@
 ---
-import HatchDivider from "../components/HatchDivider.astro";
-import HighlightedText from "../components/HighlightedText.astro";
-const featuredProjects = [
-  {
-    title: "DNS Resolver",
-    description:[
-      "Implemented an iterative DNS resolver in Go from scratch following RFC 1035, parsing binary DNS packets across a multi-hop resolution chain.",
-      "Handled CNAME traversal, nameserver fallback when glue records were unavailable, compression pointer resolution, and circular pointer detection.",
-      "Wrote unit tests for the query builder, serializer, and parser, identifying offset and packet truncation errors"
-    ],
-    tech: ["Go", "DNS", "Network Protocols", "Binary Serialization", "Unit Testing"],
-    github: "https://github.com/Vignesh-Venkatesh/dns-resolver",
-    live: null,
-    blog: "https://blog.vigneshvenkatesh.com/blog/dns-resolver-1",
-  },
-  {
-    title: "Dynamic Memory Allocator",
-    description: [
-      "Built a malloc/free-style dynamic memory allocator in C++, implementing custom heap allocation, deallocation, splitting, and block coalescing.",
-      "Developed a segregated free-list structure that organized memory blocks by size class, improving allocation efficiency and reducing fragmentation.",
-      "Enforced 16-byte alignment for allocated and free blocks while maintaining block metadata and heap consistency."
-    ],
-    tech: ["C++", "Memory Management", "Data Structures", "Systems Programming"],
-    github: "https://github.com/Vignesh-Venkatesh/DynamicMemoryAllocator",
-    live: null,
-    blog: null,
-  },
-  {
-    title: "MovieBoxd",
-    description:[
-      "Built a full-stack movie discovery and tracking platform supporting authentication, ratings, reviews, and user watchlists.",
-      "Designed RESTful backend services using Hono and PostgreSQL to manage user, review, and movie-related data.",
-      "Implemented authentication with Supabase Auth and integrated the TMDB API to retrieve real-time movie metadata, ratings, and cast information.",
-    ],
-    tech: ["React", "TypeScript", "Hono", "PostgreSQL", "Supabase", "REST APIs", "TMDb API"],
-    github: "https://github.com/Vignesh-Venkatesh/MovieBoxd",
-    live: "https://movieboxd.vigneshvenkatesh.com/",
-    blog: null,
-  },
+import { ArrowDown } from "@lucide/astro";
+import SectionCorners from "./SectionCorners.astro";
+type Project = {
+    name: string;
+    description: string;
+    tech: string[];
+    links: {
+        label: string;
+        url: string;
+    }[];
+};
+
+type SmallProject = {
+    name: string;
+    description: string;
+    links: {
+        label: string;
+        url: string;
+    }[];
+};
+
+import Title from "./Title.astro";
+
+const projects: Project[] = [
+    {
+        name: "DNS Resolver",
+        description:
+            "An iterative DNS resolver built from scratch in Go, implementing DNS packet parsing, nameserver referrals, CNAME traversal, and compression pointer handling.",
+        tech: ["Go", "DNS", "Networking"],
+        links: [
+            {
+                label: "GitHub",
+                url: "https://github.com/Vignesh-Venkatesh/dns-resolver",
+            },
+            {
+                label: "Writeup",
+                url: "https://blog.vigneshvenkatesh.com/blog/dns-resolver-1/",
+            },
+        ],
+    },
+    {
+        name: "Dynamic Memory Allocator",
+        description:
+            "A custom malloc/free-style memory allocator in C++, using segregated free lists, block splitting, and coalescing to manage heap memory.",
+        tech: ["C/C++", "Memory Management", "Systems Programming"],
+        links: [
+            {
+                label: "GitHub",
+                url: "https://github.com/Vignesh-Venkatesh/DynamicMemoryAllocator",
+            },
+        ],
+    },
+    {
+        name: "MovieBoxd",
+        description:
+            "A full-stack movie discovery and tracking platform featuring user authentication, ratings, reviews, and watchlists.",
+        tech: ["React", "TypeScript", "Hono", "PostgreSQL"],
+        links: [
+            {
+                label: "GitHub",
+                url: "https://github.com/Vignesh-Venkatesh/MovieBoxd",
+            },
+            {
+                label: "Demo",
+                url: "https://movieboxd.vigneshvenkatesh.com/",
+            },
+        ],
+    },
 ];
 
-const projectKeywords = [
-  [
-    ["iterative DNS resolver in Go", "RFC 1035"],
-    ["CNAME traversal", "nameserver fallback", "compression pointer resolution"],
-    ["dependency-free unit tests", "offset and packet truncation errors"],
-  ],
-  [
-    ["malloc/free-style dynamic memory allocator in C++"],
-    ["segregated free-list structure"],
-    ["16-byte alignment"],
-  ],
-  [
-    ["full-stack movie discovery and tracking platform"],
-    ["RESTful backend services", "Hono and PostgreSQL"],
-    ["Supabase Auth", "TMDB API"],
-  ],
-];
-
-const otherProjects = [
-  // {
-  //   title: "vtop",
-  //   description: "htop-like system monitor",
-  //   github: "https://github.com/Vignesh-Venkatesh/vtop",
-  //   live: null,
-  //   blog: null
-  // },
-  {
-    title: "wordy",
-    description: "word count tool similar to Linux's wc.",
-    github: "https://github.com/Vignesh-Venkatesh/wordy",
-    live: null,
-    blog: null,
-  },
-  {
-    title: "movieboxd LLM users",
-    description: "to simulate user activity on my LetterBoxd clone - 'MovieBoxd'.",
-    github: "https://github.com/Vignesh-Venkatesh/MovieBoxd-LLM-Users",
-    blog: "https://blog.vigneshvenkatesh.com/blog/movieboxd-llm-users",
-    live: null
-  },
+const moreProjects: SmallProject[] = [
+    {
+        name: "wordy",
+        description: "A word count tool similar to Linux's wc.",
+        links: [
+            {
+                label: "GitHub",
+                url: "https://github.com/Vignesh-Venkatesh/wordy",
+            },
+        ],
+    },
+    {
+        name: "movieboxd LLM users",
+        description:
+            "A tool to simulate user activity on my Letterboxd clone, MovieBoxd.",
+        links: [
+            {
+                label: "GitHub",
+                url: "https://github.com/Vignesh-Venkatesh/MovieBoxd-LLM-Users",
+            },
+            {
+                label: "Blog",
+                url: "https://blog.vigneshvenkatesh.com/blog/movieboxd-llm-users/",
+            },
+        ],
+    },
 ];
 ---
 
-<section
-  class="scroll-mt-20 px-6 sm:px-8 py-6 lg:px-8 border-x border-separator/50 font-google"
-  id="projects"
->
-    <div class="flex items-center gap-3">
-        <h1 class="font-bold text-tertiary text-xl">/projects</h1>
-        <div class="flex-1 h-px bg-separator"></div>
-    </div>
-
+<section id="projects" class="grid-section">
+    <SectionCorners seed="projects" />
+    <Title text="projects" />
     <!-- Featured Projects -->
-    <div class="mt-6 space-y-10">
-    {featuredProjects.map((project,i) => (
-        <>
-        <div>
-        <!-- title, links -->
-        <div class="flex justify-between items-baseline">
-            <h2 class="text-secondary font-semibold">
-            {project.title}
-            </h2>
+    <div class="flex flex-col gap-8">
+        {projects.map((project) => (
+            <article class="flex flex-col gap-2">
+                <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+                    <h3 class="font-google tracking-normal font-semibold">
+                        {project.name}
+                    </h3>
 
-            <div class="flex gap-3 text-tertiary text-sm">
-
-                <!-- demo -->
-                {
-                  project.live && (
-                    <a
-                        href={project.live}
-                        target="_blank"
-                        class="hover:text-green transition-colors"
-                    >
-                        Demo
-                    </a>
-                  )
-                }
-
-                <!-- blog post -->
-                {
-                  project.blog && (
-                    <a
-                        href={project.blog}
-                        target="_blank"
-                        class="hover:text-green transition-colors"
-                    >
-                        Blog
-                    </a>
-                  )
-                }
-
-                <!-- github -->
-                {
-                  project.github && (
-                    <a
-                        href={project.github}
-                        target="_blank"
-                        class="hover:text-green transition-colors"
-                    >
-                        GitHub
-                    </a>
-                  )
-                }
-            </div>
-        </div>
-
-        <!-- description -->
-        <div class="my-4">
-            {project.description.map((pointer, pointerIndex) => (
-                <div class="flex gap-2">
-                    <div>•</div>
-                    <p class="leading-relaxed text-justify text-sm text-secondary/90">
-                        <HighlightedText
-                            text={pointer}
-                            keywords={projectKeywords[i]?.[pointerIndex] ?? []}
-                        />
-                    </p>
+                    <div class="flex flex-wrap items-center gap-3">
+                        {project.links.map((link) => (
+                            <a
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="font-google text-small tracking-normal text-muted transition-colors hover:text-accent"
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                    </div>
                 </div>
-            ))}
-        </div>
 
-        <!-- tech -->
-        <p class="text-xs font-semibold text-tertiary mt-2">
-            {project.tech.join(" · ")}
-        </p>
-        </div>
+                <p class="text-body text-muted">{project.description}</p>
 
-        <!-- rendering divider if not last -->
-        {i !== featuredProjects.length - 1 && <HatchDivider />}
-        </>
-    ))}
-    </div>
-
-
-    <!-- Other Projects -->
-    <div class="mt-10">
-    <div class="flex items-center gap-3 mb-4">
-        <h1 class="font-bold text-tertiary text-md">other-projects</h1>
-        <div class="flex-1 h-px bg-separator"></div>
-    </div>
-
-    <div class="grid sm:grid-cols-2 gap-4 text-sm">
-        {otherProjects.map((project) => (
-          <div class="flex flex-col justify-between border-separator border-b-2 border-r-2 pr-2">
-              <div>
-                <p class="text-secondary font-semibold">{project.title}</p>
-                <p class="my-2 text-justify text-sm text-secondary/90">{project.description}</p>
-              </div>
-
-              <!-- links -->
-              <div class="flex gap-3 text-tertiary mt-4 mb-2 justify-end">
-                  <!-- demo -->
-                  {
-                    project.live && (
-                      <a
-                          href={project.live}
-                          target="_blank"
-                          class="hover:text-green transition-colors"
-                      >
-                          Demo
-                      </a>
-                    )
-                  }
-
-                  <!-- blog post -->
-                  {
-                    project.blog && (
-                      <a
-                          href={project.blog}
-                          target="_blank"
-                          class="hover:text-green transition-colors"
-                      >
-                          Blog
-                      </a>
-                    )
-                  }
-
-                  <!-- github -->
-                  {
-                    project.github && (
-                      <a
-                          href={project.github}
-                          target="_blank"
-                          class="hover:text-green transition-colors"
-                      >
-                          GitHub
-                      </a>
-                    )
-                  }
-              </div>
-          </div>
-
+                <p class="text-small text-muted font-google tracking-normal">
+                    {project.tech.join(" · ")}
+                </p>
+            </article>
         ))}
     </div>
+
+    <!-- More Projects -->
+    <div class="mt-10">
+        <button
+            id="more-projects-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="more-projects-panel"
+            class="flex cursor-pointer items-center gap-3 font-google text-small tracking-normal text-muted transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent aria-expanded:text-accent"
+        >
+            <span>more projects</span>
+            <span
+                id="more-projects-arrow"
+                aria-hidden="true"
+                class="inline-block transition-transform duration-300 motion-reduce:transition-none"
+            >
+                <ArrowDown size={14} strokeWidth={1.5} aria-hidden="true" />
+            </span>
+        </button>
+
+        <div
+            id="more-projects-panel"
+            aria-labelledby="more-projects-toggle"
+            inert
+            class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out motion-reduce:transition-none"
+        >
+            <div class="min-h-0 overflow-hidden">
+                <div class="mt-5 flex flex-col gap-5">
+                    {moreProjects.map((project) => (
+                        <article class="flex flex-col gap-2">
+                            <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+                                <h4 class="font-google tracking-normal font-semibold">
+                                    {project.name}
+                                </h4>
+
+                                <div class="flex flex-wrap items-center gap-3">
+                                    {project.links.map((link) => (
+                                        <a
+                                            href={link.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="font-google text-small tracking-normal text-muted transition-colors hover:text-accent"
+                                        >
+                                            {link.label}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <p class="text-small text-muted">{project.description}</p>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </div>
     </div>
 </section>
+
+<script>
+    const moreProjectsToggle = document.querySelector<HTMLButtonElement>(
+        "#more-projects-toggle",
+    );
+    const moreProjectsPanel = document.querySelector<HTMLDivElement>(
+        "#more-projects-panel",
+    );
+    const moreProjectsArrow = document.querySelector<HTMLSpanElement>(
+        "#more-projects-arrow",
+    );
+
+    moreProjectsToggle?.addEventListener("click", () => {
+        const isExpanded = moreProjectsToggle.getAttribute("aria-expanded") === "true";
+        moreProjectsToggle.setAttribute("aria-expanded", String(!isExpanded));
+        moreProjectsPanel?.classList.toggle("grid-rows-[1fr]", !isExpanded);
+        moreProjectsPanel?.classList.toggle("grid-rows-[0fr]", isExpanded);
+        moreProjectsPanel?.classList.toggle("opacity-100", !isExpanded);
+        moreProjectsPanel?.classList.toggle("opacity-0", isExpanded);
+        if (moreProjectsPanel) moreProjectsPanel.inert = isExpanded;
+        moreProjectsArrow?.classList.toggle("rotate-180", !isExpanded);
+    });
+</script>

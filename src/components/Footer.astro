@@ -1,12 +1,82 @@
-<section
-    class="px-6 sm:px-8 py-10 lg:px-8 border-x-separator/50 border-x font-google"
->
-    <div class="flex justify-between">
-        <a
-            href="#"
-            class="animate-bounce text-sm text-tertiary text-end hover:text-green transition-colors duration-200"
-            >↑ tp to the top ↑</a
+---
+import { ArrowUp } from "@lucide/astro";
+const links = [
+    {
+        label: "GitHub",
+        url: "https://github.com/Vignesh-Venkatesh",
+    },
+    {
+        label: "Blog",
+        url: "https://blog.vigneshvenkatesh.com/",
+    },
+    {
+        label: "LinkedIn",
+        url: "https://linkedin.com/in/vignesh-2k3",
+    },
+];
+---
+
+<footer class="site-footer mt-0 border-t border-border py-10 sm:py-12">
+    <div class="footer-inner flex flex-col gap-7 sm:flex-row sm:items-start sm:justify-between">
+        <div class="flex flex-col gap-2">
+            <p class="text-small text-muted">made with 💚 by vignesh</p>
+        </div>
+
+        <div class="flex flex-col gap-5 sm:items-end">
+        <nav
+            aria-label="Footer navigation"
+            class="flex flex-wrap items-center gap-5 font-google tracking-normal"
         >
-        <p class="text-sm text-tertiary text-end">Made with 💚 by Vignesh</p>
+            {links.map((link) => (
+                <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-small text-muted transition-colors hover:text-accent"
+                >
+                    {link.label}
+                </a>
+            ))}
+        </nav>
+        <a href="#top" class="flex w-fit items-center gap-1 font-google text-small tracking-normal text-muted transition-colors hover:text-foreground">
+            back to top <ArrowUp size={13} strokeWidth={1.5} aria-hidden="true" />
+        </a>
+        </div>
     </div>
-</section>
+</footer>
+
+<style>
+    .site-footer {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background:
+            radial-gradient(ellipse at 0 100%, #12313c66, transparent 45%),
+            radial-gradient(ellipse at 100% 100%, #15382b44, transparent 45%),
+            var(--color-background);
+    }
+
+    .site-footer::before {
+        position: absolute;
+        inset: 0;
+        content: "";
+        pointer-events: none;
+        background-image: radial-gradient(circle, var(--color-accent) 0.7px, transparent 0.9px);
+        background-size: 4px 4px;
+        opacity: 0.04;
+        mask-image: linear-gradient(90deg, #000, transparent 30%, transparent 70%, #000);
+    }
+
+    .footer-inner {
+        position: relative;
+        width: min(100%, 44rem);
+        margin-inline: auto;
+        padding-inline: 1.25rem;
+    }
+
+    @media (min-width: 40rem) {
+        .footer-inner {
+            padding-inline: 1.5rem;
+        }
+    }
+</style>
